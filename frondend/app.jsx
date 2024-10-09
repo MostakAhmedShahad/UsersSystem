@@ -14,30 +14,30 @@ function App() {
     email: ''
   });
 
-  // Fetch all users on component mount
+ 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/users')
+    axios.get('http://localhost:5000/api/users')
       .then(response => setUsers(response.data))
       .catch(error => console.error("Error fetching users", error));
   }, []);
 
-  // Handle form submission to create a new user
+ 
   const handleCreateUser = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:8080/api/users', form)
+    axios.post('http://localhost:5000/api/users', form)
       .then(response => setUsers([...users, response.data]))
       .catch(error => console.error("Error creating user", error));
   };
 
-  // Handle input changes in the form
+  
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Handle search input change
+ 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
-    axios.get(`http://localhost:8080/api/users/search?query=${e.target.value}`)
+    axios.get(`http://localhost:5000/api/users/search?query=${e.target.value}`)
       .then(response => setUsers(response.data))
       .catch(error => console.error("Error searching users", error));
   };
@@ -46,7 +46,7 @@ function App() {
     <div className="container">
       <h1>User Management</h1>
       
-      {/* Search Users */}
+       
       <input 
         type="text" 
         placeholder="Search by name or email" 
@@ -55,7 +55,7 @@ function App() {
         className="search-input"
       />
       
-      {/* Create User Form */}
+    
       <form onSubmit={handleCreateUser} className="create-user-form">
         <div>
           <label>First Name:</label>
@@ -126,7 +126,7 @@ function App() {
         <button type="submit">Create User</button>
       </form>
 
-      {/* User List */}
+      
       <h2>Users List</h2>
       <table className="users-table">
         <thead>
